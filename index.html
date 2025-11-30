@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AYUSH SINGH — Colorful Portfolio</title>
+  <meta name="description" content="Ayush Singh — colorful personal portfolio. Projects, skills, and contact." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ------------------ THEME VARIABLES ------------------ */
+    :root{
+      --bg1:#0f172a;            /* deep slate */
+      --bg2:#0b1222;            /* darker blend */
+      --text:#e5e7eb;           /* light text */
+      --muted:#94a3b8;          /* muted text */
+      --card:#111827cc;         /* glassy card */
+      --stroke:#1f2937;         /* borders */
+      --accent1:#7c3aed;        /* violet */
+      --accent2:#06b6d4;        /* cyan */
+      --accent3:#f59e0b;        /* amber */
+      --accent4:#22c55e;        /* green */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:14px;
+    }
+    /* Extra palettes you can toggle via JS */
+    .theme-sunset{
+      --bg1:#1b1219; --bg2:#0e0a0f; --text:#fff7ed; --muted:#fcdac0; --card:#2a1a22cc; --stroke:#3a2430;
+      --accent1:#ef4444; --accent2:#f97316; --accent3:#fde047; --accent4:#10b981;
+    }
+    .theme-oceanic{
+      --bg1:#011627; --bg2:#000c16; --text:#e6f1ff; --muted:#aac5ff; --card:#031222cc; --stroke:#0b2a45;
+      --accent1:#00bcd4; --accent2:#3b82f6; --accent3:#22d3ee; --accent4:#34d399;
+    }
+    .theme-aurora{
+      --bg1:#0a0f0f; --bg2:#0b1a13; --text:#edfff7; --muted:#b6f0cf; --card:#0d1813cc; --stroke:#113023;
+      --accent1:#34d399; --accent2:#a78bfa; --accent3:#22d3ee; --accent4:#f59e0b;
+    }
+
+    /* ------------------ RESET & BASICS ------------------ */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Arial,sans-serif; color:var(--text);
+      background: radial-gradient(1200px 600px at 10% -10%, color-mix(in srgb, var(--accent2), transparent 80%) 0%, transparent 70%),
+                  radial-gradient(900px 500px at 110% 10%, color-mix(in srgb, var(--accent1), transparent 80%) 0%, transparent 70%),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+      background-attachment: fixed; }
+    a{color:inherit;text-decoration:none}
+
+    /* ------------------ LAYOUT ------------------ */
+    .container{max-width:1100px;margin:40px auto;padding:22px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;background:conic-gradient(from 180deg, var(--accent1), var(--accent2), var(--accent3), var(--accent1));
+      display:grid;place-items:center;color:white;font-weight:800;box-shadow:var(--shadow);}
+    .logo span{filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));}
+
+    nav{display:flex;gap:14px;align-items:center}
+    .nav-link{padding:10px 12px;border-radius:10px;position:relative;overflow:hidden}
+    .nav-link:after{content:"";position:absolute;left:10px;right:10px;bottom:6px;height:2px;background:linear-gradient(90deg,var(--accent1),var(--accent2));opacity:0;transform:scaleX(.4);transition:.25s}
+    .nav-link:hover:after{opacity:1;transform:scaleX(1)}
+
+    .btn{padding:10px 14px;border-radius:12px;cursor:pointer;border:1px solid var(--stroke);background:#0b1320;color:var(--text);
+      transition:transform .08s ease, box-shadow .2s ease, border-color .2s ease}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px color-mix(in srgb, var(--accent2), transparent 70%)}
+    .btn.primary{border:none;background:linear-gradient(90deg,var(--accent1),var(--accent2));}
+
+    /* ------------------ HERO ------------------ */
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;margin-top:28px}
+    .kicker{display:inline-grid;grid-auto-flow:column;gap:10px;align-items:center;font-size:12px;color:var(--muted);margin-bottom:10px}
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--accent2);box-shadow:0 0 0 6px color-mix(in srgb, var(--accent2), transparent 75%)}
+    h1{font-size:42px;line-height:1.05}
+    .subtitle{color:var(--muted);margin-top:12px}
+    .hero-cta{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+
+    .avatar{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);}
+    .avatar:before{content:"";position:absolute;inset:-2px;border-radius:20px;padding:2px;background:linear-gradient(135deg,var(--accent1),var(--accent2));-webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+    .avatar img{display:block;width:100%;height:100%;object-fit:cover}
+
+    /* ------------------ SECTION WRAPPER ------------------ */
+    section{margin-top:30px;background:color-mix(in srgb, var(--card), transparent 10%);padding:18px;border-radius:var(--radius);
+      border:1px solid var(--stroke);backdrop-filter:saturate(120%) blur(8px);box-shadow:var(--shadow)}
+    h2{font-size:22px;margin-bottom:12px}
+
+    
+    /* ------------------ SKILLS ------------------ */
+    .skills{display:flex;gap:10px;flex-wrap:wrap}
+    .skill{padding:10px 12px;border-radius:12px;border:1px solid var(--stroke);font-weight:700;
+      background:linear-gradient(180deg, color-mix(in srgb, var(--accent4), transparent 90%), #0b1320)}
+
+    /* ------------------ CONTACT ------------------ */
+    form{display:grid;gap:12px}
+    input,textarea{padding:12px;border-radius:10px;border:1px solid var(--stroke);width:100%;background:#0b1320;color:var(--text)}
+    .row{display:flex;gap:10px}
+    .form-msg{color:#10b981;font-weight:700}
+
+    /* ------------------ FOOTER ------------------ */
+    footer{margin-top:24px;text-align:center;color:var(--muted);font-size:14px}
+
+    /* ------------------ RESPONSIVE ------------------ */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      nav{display:none}
+      .mobile-nav{display:flex}
+      .avatar{order:-1}
+    }
+
+    /* ------------------ MOBILE NAV ------------------ */
+    .mobile-nav{display:none}
+    .hamburger{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--stroke);background:#0b1320;color:var(--text)}
+
+    /* ------------------ THEME SWITCHER ------------------ */
+    .theme-switcher{display:flex;gap:8px;flex-wrap:wrap}
+    .swatch{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid var(--stroke);cursor:pointer;background:#0b1320}
+    .sw{width:16px;height:16px;border-radius:999px}
+  </style>
+</head>
+<body>
+  <div class="container" id="page">
+    <header>
+      <div class="brand">
+        <div class="logo"><span>𝕋𝕀ᴬ</span></div>
+        <div>
+          <div style="font-weight:800;font-size:18px;letter-spacing:.2px">Team Innovate</div>
+          <div style="font-size:12px;color:var(--muted)">Frontend Developer • Student • Creator</div>
+        </div>
+      </div>
+      <nav id="mainNav">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link btn primary" href="#contact">Contact</a>
+      </nav>
+      <div class="mobile-nav">
+        <button class="hamburger" id="navToggle" aria-label="menu">☰</button>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <div class="kicker"><span class="dot"></span> Available for freelance in India</div>
+          <h1>We build <span style="background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent">clean, colorful</span> & user‑focused web experiences.</h1>
+          <p class="subtitle">Modern, fast and accessible websites that balance aesthetics with functionality. Every project is designed to be useful, engaging and built for real‑world impact.</p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn">Get in touch</a>
+          </div>
+          <div style="margin-top:18px" class="theme-switcher">
+            <span style="color:var(--muted);font-weight:700">Theme:</span>
+            <button class="swatch" data-theme="theme-aurora"><span class="sw" style="background:#34d399"></span> Aurora</button>
+            <button class="swatch" data-theme="theme-oceanic"><span class="sw" style="background:#3b82f6"></span> Oceanic</button>
+            <button class="swatch" data-theme="theme-sunset"><span class="sw" style="background:#ef4444"></span> Sunset</button>
+            <button class="swatch" data-theme="default"><span class="sw" style="background:#7c3aed"></span> Default</button>
+          </div>
+        </div>
+        <div>
+          <div class="avatar">
+            <img src="https://www.whiteroomstudio.com.sg/wordpress/wp-content/uploads/2021/10/Professional-Corporate-Photoshoot-in-Singapore-White-Room-Studio-6.jpeg" alt="avatar">
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="about">
+        <h2>About Us</h2>
+        <h4><p style="color:var(--muted)">We are a group of passionate student developers driven by curiosity and creativity. Our focus lies in building clean, responsive, and user-friendly websites using HTML, CSS, and JavaScript. Through continuous learning and hands-on projects, we enhance our technical expertise and share our work on GitHub. Currently, we are exploring modern frameworks, improving UI/UX design skills, and striving to create digital experiences that are both functional and visually engaging. Our ultimate goal is to grow as developers while contributing meaningful solutions to the web development community.</p></h4>
+      <section id="skills" style="text-align: center; margin: 50px 0;">
+  <h2 style="font-size: 28px; margin-bottom: 25px; color: #efe7e7;">My Skills</h2>
+  
+  <div class="skills" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+    <div class="skill" style="font-size: 18px; background: linear-gradient(90deg, #FF6B6B, #FF8E53); color: #fff; padding: 12px 25px; border-radius: 8px; width: 220px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: 0.3s;">HTML</div>
+    
+    <div class="skill" style="font-size: 18px; background: linear-gradient(90deg, #4facfe, #00f2fe); color: #fff; padding: 12px 25px; border-radius: 8px; width: 220px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: 0.3s;">CSS</div>
+    
+    <div class="skill" style="font-size: 18px; background: linear-gradient(90deg, #F7971E, #FFD200); color: #fff; padding: 12px 25px; border-radius: 8px; width: 220px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: 0.3s;">JavaScript</div>
+    
+    <div class="skill" style="font-size: 18px; background: linear-gradient(90deg, #6a11cb, #2575fc); color: #fff; padding: 12px 25px; border-radius: 8px; width: 220px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: 0.3s;">Git & GitHub</div>
+    
+    <div class="skill" style="font-size: 18px; background: linear-gradient(90deg, #11998e, #38ef7d); color: #fff; padding: 12px 25px; border-radius: 8px; width: 220px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.15); transition: 0.3s;">Responsive Design</div>
+  </div>
+  
+  <script>
+    // Add hover animation effect
+    document.querySelectorAll('.skill').forEach(skill => {
+      skill.addEventListener('mouseover', () => {
+        skill.style.transform = 'scale(1.05)';
+        skill.style.boxShadow = '0 6px 15px rgba(0,0,0,0.2)';
+      });
+      skill.addEventListener('mouseout', () => {
+        skill.style.transform = 'scale(1)';
+        skill.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)';
+      });
+    });
+  </script>
+</section>
+
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <form id="contactForm">
+          <div class="row">
+            <input id="name" placeholder="Your name" required>
+            <input id="email" placeholder="Your email" type="email" required>
+          </div>
+          <textarea id="message" placeholder="Message" rows="4" required></textarea>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button type="submit" class="btn primary">Send message</button>
+            <div id="formMsg" class="form-msg"></div>
+          </div>
+        </form>
+      </section>
+
+      <footer>
+        Built with ❤ • <span id="year"></span> • <a href="#">GitHub</a>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const mainNav = document.getElementById('mainNav');
+    if(navToggle){
+      navToggle.addEventListener('click', ()=>{
+        mainNav.style.display = (mainNav.style.display === 'flex') ? 'none' : 'flex';
+      });
+    }
+
+    // Project search + filter
+    const projectsGrid = document.getElementById('projectsGrid');
+    const search = document.getElementById('searchProject');
+    const filter = document.getElementById('filterTech');
+    function filterProjects(){
+      const q = (search?.value || '').trim().toLowerCase();
+      const tech = filter?.value || 'all';
+      const cards = projectsGrid.querySelectorAll('.card');
+      cards.forEach(card=>{
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        const desc = card.querySelector('p').innerText.toLowerCase();
+        const matchText = title.includes(q) || desc.includes(q);
+        const matchTech = (tech==='all') || (card.dataset.tech === tech);
+        card.style.display = (matchText && matchTech) ? 'block' : 'none';
+      });
+    }
+    if(search) search.addEventListener('input', filterProjects);
+    if(filter) filter.addEventListener('change', filterProjects);
+
+    // Contact form (demo only)
+    const contactForm = document.getElementById('contactForm');
+    const formMsg = document.getElementById('formMsg');
+    contactForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if(!name||!email||!message){ formMsg.textContent = 'Please fill all fields'; return }
+      formMsg.textContent = 'Message sent — thank you!';
+      contactForm.reset();
+      setTimeout(()=>formMsg.textContent = '', 3500);
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const href = a.getAttribute('href');
+        if(href.length>1){
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+
+    // Theme switcher (adds/removes classes on <body>)
+    const page = document.getElementById('page');
+    document.querySelectorAll('.swatch').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        page.classList.remove('theme-aurora','theme-oceanic','theme-sunset');
+        const theme = btn.dataset.theme;
+        if(theme!== 'default') page.classList.add(theme);
+        // store preference
+        localStorage.setItem('ayush-theme', theme);
+      });
+    });
+    // Load saved theme
+    const saved = localStorage.getItem('ayush-theme');
+    if(saved && saved !== 'default') document.getElementById('page').classList.add(saved);
+  </script>
+</body>
+</html>
